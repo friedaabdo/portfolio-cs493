@@ -399,23 +399,41 @@ input:focus, textarea:focus {
    Responsive
 ========= */
 @media (max-width: 900px) {
+  /* Layout: stack and simplify */
   .hero-grid { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: 1fr; }
   .two-col { grid-template-columns: 1fr; }
 
+  /* Tighten header spacing and nav */
   .nav-toggle { display: inline-flex; }
-
-  /* Remove extra left indent on small screens to keep layout tight */
+  .nav-row { padding: 10px 0; }
   .brand { margin-left: 0; }
 
-  /* On stacked skills, use top separators instead of left borders */
+  /* Reduce base sizes and paddings for mobile */
+  :root {
+    --base-font-size: 16px;
+    --content-padding: 0.75rem;
+    --section-gap: 1rem;
+  }
+
+  /* Reduce section and hero padding */
+  .section { padding: 18px 0; }
+  .hero { padding: 28px 0 12px; }
+  .hero-content h1 { font-size: 28px; }
+  .section h2 { font-size: 20px; }
+
+  /* Cards: tighter spacing */
+  .card { padding: 12px; }
+  .card > * + * { padding-top: 8px; margin-top: 8px; }
+
+  /* Skills: stacked separators (use theme border) */
   .skills-grid > * + * {
     border-left: none;
     padding-left: 0;
-    border-top: 1px solid rgba(255,255,255,0.04);
-    padding-top: 12px;
-    margin-top: 12px;
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+    margin-top: 10px;
   }
 
   .site-nav {
