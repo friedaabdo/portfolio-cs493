@@ -266,6 +266,49 @@ img { max-width: 100%; display: block; }
   grid-template-columns: repeat(3, 1fr);
 }
 
+/* Exaggerated hover effect for project cards */
+.projects-grid .card {
+  position: relative;
+  overflow: visible;
+  transition: transform 450ms cubic-bezier(.2,.9,.2,1), box-shadow 450ms, border-color 350ms, filter 350ms;
+  transform-origin: center;
+  will-change: transform, box-shadow;
+}
+
+.projects-grid .card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at 20% 10%, rgba(255, 90, 90, 0.18), transparent 30%),
+              radial-gradient(circle at 80% 80%, rgba(120, 80, 255, 0.12), transparent 35%);
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 350ms ease, transform 350ms ease;
+  z-index: 0;
+}
+
+.projects-grid .card:hover,
+.projects-grid .card:focus-within {
+  transform: translateY(-18px) rotate(-1deg) scale(1.06);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.65), 0 0 40px rgba(207, 18, 18, 0.12);
+  border-color: rgba(207, 18, 18, 0.45);
+  z-index: 20;
+}
+
+.projects-grid .card:hover::after,
+.projects-grid .card:focus-within::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Ensure card content sits above overlay */
+.projects-grid .card > * {
+  position: relative;
+  z-index: 2;
+}
+
 .project h3 {
   margin: 0 0 8px;
   font-size: 18px;
