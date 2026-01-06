@@ -205,6 +205,12 @@ img { max-width: 100%; display: block; }
   font-size: 18px;
 }
 
+/* Ensure h3 inside cards has no top gap */
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 30px; /* add breathing space below card headings */
+}
+
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -278,6 +284,12 @@ img { max-width: 100%; display: block; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
+}
+
+/* Vertical dividers between skills columns (subtle) */
+.skills-grid > * + * {
+  border-left: 1px solid rgba(255, 255, 255, 0.813);
+  padding-left: 15px;
 }
 
 .pill-list {
@@ -396,6 +408,15 @@ input:focus, textarea:focus {
 
   /* Remove extra left indent on small screens to keep layout tight */
   .brand { margin-left: 0; }
+
+  /* On stacked skills, use top separators instead of left borders */
+  .skills-grid > * + * {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    padding-top: 12px;
+    margin-top: 12px;
+  }
 
   .site-nav {
     display: none;
