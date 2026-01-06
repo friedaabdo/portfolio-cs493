@@ -31,6 +31,8 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
+  position: relative; /* allow full-page pseudo background */
+  min-height: 100vh;
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: var(--base-font-size);
@@ -38,8 +40,22 @@ body {
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: radial-gradient(900px 450px at 30% -10%, rgba(44, 249, 89, 0.579), transparent),
-              radial-gradient(900px 450px at 90% 10%, rgba(172, 78, 254, 0.385), transparent),
+  background: var(--bg);
+}
+
+/* Full-page gradient that grows with document height (scrolls with content) */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  background: radial-gradient(500px 450px at 10% 45%, rgba(207, 18, 18, 0.321), transparent),
+              radial-gradient(900px 450px at 90% 70%, rgba(44, 249, 88, 0.346), transparent),
+              radial-gradient(900px 450px at 90% 20%, rgba(142, 48, 223, 0.603), transparent),
               var(--bg);
 }
 
@@ -434,6 +450,23 @@ input:focus, textarea:focus {
     border-top: 1px solid var(--border);
     padding-top: 10px;
     margin-top: 10px;
+  }
+
+  /* Make body gradient span the full document height on mobile */
+  body { position: relative; min-height: 100vh; }
+  body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    background: radial-gradient(500px 220px at 30% 45%, rgba(207, 18, 18, 0.321), transparent),
+                radial-gradient(900px 450px at 50% 70%, rgba(44, 249, 88, 0.346), transparent),
+                radial-gradient(900px 450px at 90% 20%, rgba(142, 48, 223, 0.603), transparent),
+                var(--bg);
   }
 
   .site-nav {
